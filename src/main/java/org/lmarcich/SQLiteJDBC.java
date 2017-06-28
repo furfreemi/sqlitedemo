@@ -14,15 +14,11 @@ public class SQLiteJDBC {
     }
 
     static void createTable() {
-        Connection c = null;
-        Statement stmt = null;
-
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            Connection c = DriverManager.getConnection("jdbc:sqlite:test.db");
             System.out.println("Opened database successfully");
 
-            stmt = c.createStatement();
+            Statement stmt = c.createStatement();
             String sql = "CREATE TABLE COMPANY " +
                     "(ID INT PRIMARY KEY     NOT NULL," +
                     " NAME           TEXT    NOT NULL, " +
@@ -40,15 +36,12 @@ public class SQLiteJDBC {
     }
 
     static void insert() {
-        Connection c = null;
-        Statement stmt = null;
-
         try {
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            Connection c = DriverManager.getConnection("jdbc:sqlite:test.db");
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
 
-            stmt = c.createStatement();
+            Statement stmt = c.createStatement();
             String sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
                     "VALUES (1, 'Paul', 32, 'California', 20000.00 );";
             stmt.executeUpdate(sql);
@@ -77,14 +70,12 @@ public class SQLiteJDBC {
 
 
     static void select() {
-        Connection c = null;
-        Statement stmt = null;
         try {
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            Connection c = DriverManager.getConnection("jdbc:sqlite:test.db");
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
 
-            stmt = c.createStatement();
+            Statement stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM COMPANY;");
 
             while (rs.next()) {
